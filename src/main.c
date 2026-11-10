@@ -1,14 +1,21 @@
-#include <ncurses.h>
+#include <ncurses.h> 
 
-int main(void) {
-    initscr();
-    printw("TETRIS - press q to quit");
-    refresh();
+int main(void) 
+{
+      initscr(); 
+      cbreak();
+      noecho();
+      keypad(stdscr, TRUE); 
 
-    int ch;
-    while ((ch = getch()) != 'q') {
-    }
+      printw("TETRIS\n"); 
+      printw("Press q to quit\n"); 
+      refresh(); 
 
-    endwin();
-    return 0;
+      int ch; 
+      while ((ch = getch())!='q') 
+      {
+       }
+
+      endwin();
+      return 0;
 }
