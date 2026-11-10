@@ -2,8 +2,14 @@ CC = gcc
 CFLAGS = -Wall -Wextra -std=c11 -Iinclude
 LDLIBS = -lncurses
 
-tetris: src/main.c
-	$(CC) $(CFLAGS) -o tetris src/main.c $(LDLIBS)
+SRC = $(wildcard src/*.c)
+OBJ = $(SRC:.c=.o)
+
+tetris: $(OBJ)
+	$(CC) $(CFLAGS) -o tetris $(OBJ) $(LDLIBS)
+
+%.o: %.c
+	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
 	rm -f tetris src/*.o

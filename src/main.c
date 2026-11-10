@@ -1,21 +1,23 @@
-#include <ncurses.h> 
+#include <ncurses.h>
+#include "tetris.h"
 
-int main(void) 
-{
-      initscr(); 
-      cbreak();
-      noecho();
-      keypad(stdscr, TRUE); 
+int main(void) {
+    Board board;
+    board_init(&board);
 
-      printw("TETRIS\n"); 
-      printw("Press q to quit\n"); 
-      refresh(); 
+    initscr();
+    cbreak();
+    noecho();
+    keypad(stdscr, TRUE);
 
-      int ch; 
-      while ((ch = getch())!='q') 
-      {
-       }
+    printw("TETRIS\n");
+    printw("Press q to quit\n");
+    refresh();
 
-      endwin();
-      return 0;
+    int ch;
+    while ((ch = getch()) != 'q') {
+    }
+
+    endwin();
+    return 0;
 }
