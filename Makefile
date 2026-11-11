@@ -1,17 +1,20 @@
 CC = gcc
 CFLAGS = -Wall -Wextra -std=c11 -Iinclude
-LDLIBS = -lncurses
+LDFLAGS = -lncurses
 
-SRC = $(wildcard src/*.c)
-OBJ = $(SRC:.c=.o)
+SRCS = src/main.c src/board.c
+OBJS = $(SRCS:.c=.o)
+TARGET = tetris
 
-tetris: $(OBJ)
-	$(CC) $(CFLAGS) -o tetris $(OBJ) $(LDLIBS)
+all: $(TARGET)
 
-%.o: %.c
+$(TARGET): $(OBJS)
+	$(CC) $(CFLAGS) -o $(TARGET) $(OBJS) $(LDFLAGS)
+
+src/%.o: src/%.c include/tetris.h
 	$(CC) $(CFLAGS) -c $< -o $@
 
 clean:
-	rm -f tetris src/*.o
+	rm -f $(OBJS) $(TARGET) 
 
-.PHONY: clean
+.PHONY: all clean 

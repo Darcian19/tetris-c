@@ -9,5 +9,6 @@ typedef struct {
 } Board;
 
 void board_init(Board *board);
+void board_render(const Board *board); 
 
 #endif

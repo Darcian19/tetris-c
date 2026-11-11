@@ -6,6 +6,7 @@ void board_init(Board *board) {
             board->cells[y][x] = 0;
         }
     }
+board->cells[19][4]=1; 
 }
 void board_render(const Board *board) 
 {

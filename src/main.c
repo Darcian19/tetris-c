@@ -3,15 +3,14 @@
 
 int main(void) {
     Board board;
-    board_init(&board);
 
     initscr();
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
     
-    board.cells[19][4]=1; 
-    refresh();
+    board_init(&board);
+        
 
     int ch;
     while ((ch = getch()) != 'q'  &&  ch!='Q') 
