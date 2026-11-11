@@ -1,3 +1,4 @@
+
 #ifndef TETRIS_H
 #define TETRIS_H
 
@@ -11,4 +12,15 @@ typedef struct {
 void board_init(Board *board);
 void board_render(const Board *board); 
 
+typedef struct{
+	int type; 
+	int rotation; 
+	int x; 
+	int y; 
+} Piece; 
+
+void piece_spawn(Piece *piece); 
+int piece_can_move(const Board *board, const Piece *piece, int dx, int dy); 
+void piece_move(Board *board, Piece *piece, int dx, int dy);
+void piece_render(const Piece *piece);  
 #endif

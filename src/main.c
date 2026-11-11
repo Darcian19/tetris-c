@@ -3,40 +3,39 @@
 
 int main(void) {
     Board board;
-
+    Piece piece;
     initscr();
     cbreak();
     noecho();
     keypad(stdscr, TRUE);
     
     board_init(&board);
+    piece_spawn(&piece);
         
 
     int ch;
     while ((ch = getch()) != 'q'  &&  ch!='Q') 
     { 
-        clear(); 
-        mvprintw( 0,4, "TETRIS"); 
-        board_render(&board);
         
         switch (ch) 
         {
            case 'a':
            case 'A': 
-              mvprintw(23,4,"LEFT"); 
+              piece_move(&board, &piece, -1,0); 
               break; 
            case 's':
            case 'S': 
-              mvprintw(23,4,"DOWN"); 
-              break; 
-           case 'd': 
-           case 'D': 
-              mvprintw(23,4,"RIGHT"); 
-              break; 
-           default: 
-              mvprintw(23,4, "UNKNOWN KEY"); 
+              piece_move(&board, &piece, 0,1);
               break;
+	  case 'd':
+          case 'D': 
+              piece_move(&board, &piece, 1,0);
+              break; 
          }  
+	clear();
+	mvprintw(0,4,"TETRIS");
+	board_render(&board); 
+	piece_render(&piece); 
         refresh(); 
     }
     endwin();
