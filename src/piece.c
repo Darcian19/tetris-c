@@ -111,3 +111,30 @@ void piece_render(const Piece *piece) {
         }
     }
 }
+
+void piece_rotate (Board *board, Piece *piece) {
+	int old_rotation = piece->rotation; 
+	piece->rotation = (piece->rotation +1) %4; 
+	if (!piece_can_move(board, piece, 0, 0)){
+		piece->rotation = old_rotation;
+	}
+}
+void piece_lock(Board *board, const Piece *piece) 
+{
+	for (int py=0;py<4;py++) 
+	{
+		for (int px=0;px<4;px++) 
+		{
+			if (SHAPES[piece->type][piece->rotation][py][px]==0)
+			{
+				continue;
+			}
+			int board_x = piece->x +px;
+			int board_y = piece->y + py;
+			if (board_x>=0 && board_x< BOARD_WIDTH && board_y >=0 && board_y <BOARD_HEIGHT)
+			{
+				board->cells[board_y][board_x]=1;
+			}
+		}
+	}
+} 

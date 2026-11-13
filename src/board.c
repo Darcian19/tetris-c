@@ -6,7 +6,6 @@ void board_init(Board *board) {
             board->cells[y][x] = 0;
         }
     }
-board->cells[19][4]=1; 
 }
 void board_render(const Board *board) 
 {
@@ -25,4 +24,38 @@ void board_render(const Board *board)
          } 
      }
 }
+int board_clear_lines(Board *board) 
+{
+	int cleared =0; 
+	for (int y=BOARD_HEIGHT-1;y>=0;y--) 
+	{
+		int full=1;
+		for (int x=0;x<BOARD_WIDTH;x++)
+		{
+ 
+			if(board->cells[y][x]==0)
+			{
+				full =0; 
+				break;
+			}
+		}
 
+	if (full) 
+	{
+		cleared++; 
+		for (int row =y;row>0;row--) 
+		{
+			for (int x =0;x<BOARD_WIDTH;x++)
+			{
+				board->cells[row][x]=board->cells[row-1][x];
+			}
+		}
+		for (int x=0;x<BOARD_WIDTH;x++) 
+		{
+			board->cells[0][x]=0;
+		}
+		y++;
+	}
+	}
+	return cleared;
+}	

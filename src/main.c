@@ -12,34 +12,53 @@ int main(void) {
     board_init(&board);
     piece_spawn(&piece);
         
-    timeout(500);
+    timeout(750);
 
     int ch;
     while ((ch = getch()) != 'q'  &&  ch!='Q') 
     { 
         if (ch ==ERR)
 	{
-		piece_move(&board,&piece,0,1);
+		if(piece_can_move(&board,&piece,0,1))
+		{
+			piece_move(&board , &piece, 0,1);
+		}
+		else 
+		{
+			piece_lock(&board , &piece);
+			board_clear_lines(&board);
+			piece_spawn(&piece);
+			if (!piece_can_move(&board,&piece,0,0))
+			{
+				mvprintw(0,20,"GAME OVER");
+				refresh();
+				getch();
+				break;
+			}
+		}
 	}
-        switch (ch) 
-        {
-           case 'a':
-           case 'A': 
-              piece_move(&board, &piece, -1,0); 
-              break; 
-           case 's':
-           case 'S': 
-              piece_move(&board, &piece, 0,1);
-              break;
-	  case 'd':
-          case 'D': 
-              piece_move(&board, &piece, 1,0);
-              break;
-	  case 'w': 
-	  case 'W': 
-	      piece_rotate(&board, &piece);
-	      break;  
-         }  
+	else
+	{
+        	switch (ch) 
+        	{
+        	   case 'a':
+           	case 'A': 
+           	   piece_move(&board, &piece, -1,0); 
+           	   break; 
+           	case 's':
+           	case 'S': 
+           	   piece_move(&board, &piece, 0,1);
+           	   break;
+	  	case 'd':
+          	case 'D': 
+          	    piece_move(&board, &piece, 1,0);
+          	    break;
+	  	case 'w': 
+	  	case 'W': 
+	  	    piece_rotate(&board, &piece);
+	  	    break;  
+         	}
+	} 
 	clear();
 	mvprintw(0,4,"TETRIS");
 	board_render(&board); 
