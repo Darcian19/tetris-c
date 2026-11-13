@@ -12,11 +12,15 @@ int main(void) {
     board_init(&board);
     piece_spawn(&piece);
         
+    timeout(500);
 
     int ch;
     while ((ch = getch()) != 'q'  &&  ch!='Q') 
     { 
-        
+        if (ch ==ERR)
+	{
+		piece_move(&board,&piece,0,1);
+	}
         switch (ch) 
         {
            case 'a':
@@ -30,7 +34,11 @@ int main(void) {
 	  case 'd':
           case 'D': 
               piece_move(&board, &piece, 1,0);
-              break; 
+              break;
+	  case 'w': 
+	  case 'W': 
+	      piece_rotate(&board, &piece);
+	      break;  
          }  
 	clear();
 	mvprintw(0,4,"TETRIS");
