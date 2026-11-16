@@ -21,7 +21,7 @@ int main(void) {
     while ((ch = getch()) != 'q'  &&  ch!='Q') 
     { 
         if (ch ==ERR)
-	{
+	{	
 		if(piece_can_move(&board,&piece,0,1))
 		{
 			piece_move(&board , &piece, 0,1);
@@ -36,10 +36,11 @@ int main(void) {
 			piece_spawn(&piece);
 			if (!piece_can_move(&board,&piece,0,0))
 			{
-				clear(); 
-				mvprintw(0,20,"GAME OVER");
+				clear();
+				mvprintw(11,4,"GAME OVER");
 				mvprintw(12,4,"SCORE: %d", state.score);
 				mvprintw(13,4,"PRESS r TO RESTART");
+				timeout(9999999);
 				refresh();
 				
 				int restart_key = getch();
@@ -51,7 +52,7 @@ int main(void) {
 					timeout(game_get_delay(&state));
 					continue;
 				}
-				break; 
+			        else break; 
 			}
 			timeout(game_get_delay(&state));
 		}
@@ -88,8 +89,8 @@ int main(void) {
 	clear();
 	mvprintw(0,4,"TETRIS");
 	mvprintw(1,4,"SCORE :%d", state.score);
-	mvprintw(2,4,"LEVEL :%d", state.level);
-	mvprintw(3,4,"LINES: %d", state.lines);
+	mvprintw(1,20,"LEVEL :%d", state.level);
+	mvprintw(1,30,"LINES: %d", state.lines);
 	board_render(&board); 
 	piece_render(&piece); 
         refresh(); 

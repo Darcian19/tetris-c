@@ -2,6 +2,7 @@
 #include "tetris.h" 
 #include <stdlib.h>
 #include<time.h>
+
 static const int SHAPES[7][4][4][4] = {
     // I
     {
@@ -55,7 +56,8 @@ static const int SHAPES[7][4][4][4] = {
 };
 
 void piece_spawn(Piece *piece){
-	int cate = rand() %6; 
+	srand(time(NULL));
+	int cate = rand() %7; 
 	piece->type = cate ;
 	piece->rotation =0; 
 	piece->x=3;
