@@ -1,6 +1,7 @@
 #include <ncurses.h> 
 #include "tetris.h" 
-
+#include <stdlib.h>
+#include<time.h>
 static const int SHAPES[7][4][4][4] = {
     // I
     {
@@ -54,7 +55,8 @@ static const int SHAPES[7][4][4][4] = {
 };
 
 void piece_spawn(Piece *piece){
-	piece->type = 0 ;
+	int cate = rand() %6; 
+	piece->type = cate ;
 	piece->rotation =0; 
 	piece->x=3;
 	piece->y = 0; 

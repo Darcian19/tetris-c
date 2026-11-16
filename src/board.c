@@ -40,22 +40,22 @@ int board_clear_lines(Board *board)
 			}
 		}
 
-	if (full) 
-	{
-		cleared++; 
-		for (int row =y;row>0;row--) 
+		if (full) 
 		{
-			for (int x =0;x<BOARD_WIDTH;x++)
+			cleared++; 
+			for (int row =y;row>0;row--) 
 			{
-				board->cells[row][x]=board->cells[row-1][x];
+				for (int x =0;x<BOARD_WIDTH;x++)
+				{
+					board->cells[row][x]=board->cells[row-1][x];
+				}
 			}
+			for (int x=0;x<BOARD_WIDTH;x++) 
+			{
+				board->cells[0][x]=0;
+			}
+			y++;
 		}
-		for (int x=0;x<BOARD_WIDTH;x++) 
-		{
-			board->cells[0][x]=0;
-		}
-		y++;
-	}
 	}
 	return cleared;
 }	

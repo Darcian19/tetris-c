@@ -5,6 +5,17 @@
 #define BOARD_WIDTH 10
 #define BOARD_HEIGHT 20
 
+typedef struct 
+{
+	int score;
+	int level;
+	int lines; 
+}
+GameState;
+void game_init (GameState *state); 
+void game_update_score(GameState *state, int cleared);
+int game_get_delay(const GameState *state); 
+
 typedef struct {
     int cells[BOARD_HEIGHT][BOARD_WIDTH];
 } Board;
